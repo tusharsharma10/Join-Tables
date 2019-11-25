@@ -127,15 +127,32 @@ public class OrmController {
 		
 		System.out.println(str1);
 		
-//		Set<DevPgJoin> set2 = projectGroupRepository.findById("Tesla").get().getDevpgjoinSet();
-//		
-//		for(DevPgJoin d:set2) {
-//			
-//			System.out.println(d.getDeveloper().getAuthId());
-//			
-//		}
+
 		
 	}
 	
+	@GetMapping("/changereviewers")
+	public void updateRev() {
 	
+		String pgName = "Tesla";
+		String devAuth =  "dsharm7m";
+		String newRev = "tsharmmx";
+		
+		
+	System.out.println("deleting");	
+	devPgToRevJoinRepository.deleteAll(devPgToRevJoinRepository.findByDevPgJoin(devPgJoinRepository.findById(pgName+devAuth).get()));
+	
+	
+	System.out.println("saving");	
+	
+	DevPgToRevJoin d = new DevPgToRevJoin();
+	d.setDevPgJoin(devPgJoinRepository.findById(pgName+devAuth).get());
+	d.setReviewer(userRepository.findById(newRev).get());
+	
+	devPgToRevJoinRepository.save(d);	
+	
+	}
+
+
+		
 }
