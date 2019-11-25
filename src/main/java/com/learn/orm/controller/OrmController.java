@@ -105,5 +105,37 @@ public class OrmController {
 		
 	}
 	
+	@GetMapping("/changeDevelopers")
+	public void updateDev() {
+		
+		
+		
+		
+		String pgName = "Tesla";
+		String devId = "tsharmmx";
+		
+		devPgJoinRepository.delete(devPgJoinRepository.findById(pgName+devId).get());
+		
+		Set<DevPgJoin> set1 = projectGroupRepository.findById("Tesla").get().getDevpgjoinSet();
+		ArrayList<String> str1 = new ArrayList<String>(); 
+		
+		for(DevPgJoin d:set1) {
+			
+			str1.add(d.getDeveloper().getAuthId());
+			
+		}
+		
+		System.out.println(str1);
+		
+//		Set<DevPgJoin> set2 = projectGroupRepository.findById("Tesla").get().getDevpgjoinSet();
+//		
+//		for(DevPgJoin d:set2) {
+//			
+//			System.out.println(d.getDeveloper().getAuthId());
+//			
+//		}
+		
+	}
+	
 	
 }
